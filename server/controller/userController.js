@@ -62,6 +62,7 @@ const userLogin = async (req, res) => {
       if (isMatch) {
         res.status(201).json({ msg: userExist });
         const token = generateToken(userExist._id);
+        res.cookie("jwt", token, { httpOnly: true, maxAge: 600000 });
         console.log(token);
       } else {
         res.status(404).json({ msg: "Invalid credentials" });
