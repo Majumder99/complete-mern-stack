@@ -1,6 +1,14 @@
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
+//Methods
+const generateToken = (id) => {
+  const token = jwt.sign({ id }, process.env.SECRET_KEY);
+  return token;
+};
+
+//routesFunctions
 const homeGet = (req, res) => {
   res.send("Hello from the user route");
 };
@@ -53,6 +61,8 @@ const userLogin = async (req, res) => {
       const isMatch = await bcrypt.compare(password, userExist.password);
       if (isMatch) {
         res.status(201).json({ msg: userExist });
+        const token = generateToken(userExist._id);
+        console.log(token);
       } else {
         res.status(404).json({ msg: "Invalid credentials" });
       }
