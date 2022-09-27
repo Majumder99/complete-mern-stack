@@ -6,6 +6,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import "bootstrap/dist/css/bootstrap.css";
 function App() {
   return (
     <>
