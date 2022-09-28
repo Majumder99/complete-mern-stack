@@ -4,8 +4,11 @@ import { NavLink } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
+      <section className="vh-100 mt-5">
+        <div
+          className="container-fluid h-custom shadow-lg p-2 bg-body"
+          style={{ width: "850px", height: "80vh" }}
+        >
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img

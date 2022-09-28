@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 const Contact = () => {
   return (
     <>
@@ -36,52 +35,54 @@ const Contact = () => {
       </div>
 
       {/* Contact section */}
-      <section
-        className="mb-4 conainer-fluid shadow p-2 mb-5 bg-body rounded"
-        style={{ width: "1000px", marginLeft: "350px" }}
-      >
-        <h2 className="h1-responsive font-weight-bold text-center my-4">
-          Contact us
-        </h2>
-        <form action="">
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            <div className="p-2 m-3" style={{ width: "500px" }}>
-              <label htmlFor="name" className="me-4">
-                Your Name
-              </label>
-              <input type="text" id="name" style={{ width: "100%" }} />
-            </div>
+      <section className="vh-150">
+        <div
+          className="container-fluid h-custom shadow-lg p-2 bg-body"
+          style={{ width: "850px", height: "100vh" }}
+        >
+          <h2 className="h1-responsive font-weight-bold text-center my-4">
+            Contact us
+          </h2>
+          <form action="">
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <div className="p-2 m-3" style={{ width: "500px" }}>
+                <label htmlFor="name" className="me-4">
+                  Your Name
+                </label>
+                <input type="text" id="name" style={{ width: "100%" }} />
+              </div>
 
-            <div className="p-2 m-3" style={{ width: "500px" }}>
-              <label htmlFor="email" className="me-4">
-                Your Email
-              </label>
-              <input type="email" id="email" style={{ width: "100%" }} />
-            </div>
+              <div className="p-2 m-3" style={{ width: "500px" }}>
+                <label htmlFor="email" className="me-4">
+                  Your Email
+                </label>
+                <input type="email" id="email" style={{ width: "100%" }} />
+              </div>
 
-            <div className="p-2 m-3" style={{ width: "500px" }}>
-              <label htmlFor="subject" className="me-4">
-                Your Subject
-              </label>
-              <input type="text" id="subject" style={{ width: "100%" }} />
-            </div>
+              <div className="p-2 m-3" style={{ width: "500px" }}>
+                <label htmlFor="subject" className="me-4">
+                  Your Subject
+                </label>
+                <input type="text" id="subject" style={{ width: "100%" }} />
+              </div>
 
-            <div className="p-2 m-3" style={{ width: "500px" }}>
-              <label htmlFor="message" className="me-4">
-                Your Message
-              </label>
-              <textarea
-                name="message"
-                id="message"
-                cols="65"
-                rows="10"
-              ></textarea>
+              <div className="p-2 m-3" style={{ width: "500px" }}>
+                <label htmlFor="message" className="me-4">
+                  Your Message
+                </label>
+                <textarea
+                  name="message"
+                  id="message"
+                  cols="65"
+                  rows="10"
+                ></textarea>
+              </div>
             </div>
-          </div>
-          <div className="d-flex justify-content-center">
-            <input type="submit" value="Submit" className="btn btn-primary" />
-          </div>
-        </form>
+            <div className="d-flex justify-content-center">
+              <input type="submit" value="Submit" className="btn btn-primary" />
+            </div>
+          </form>
+        </div>
       </section>
     </>
   );
