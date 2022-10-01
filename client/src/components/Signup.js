@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Signup = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    work: "",
+    phone: "",
+    password: "",
+    repassword: "",
+  });
+
   return (
     <>
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
@@ -24,6 +33,10 @@ const Signup = () => {
                               type="text"
                               id="form3Example1c"
                               className="form-control"
+                              value={user.name}
+                              onChange={(e) =>
+                                setUser({ ...user, name: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example1c">
                               Your Name
@@ -38,6 +51,10 @@ const Signup = () => {
                               type="email"
                               id="form3Example3c"
                               className="form-control"
+                              value={user.email}
+                              onChange={(e) =>
+                                setUser({ ...user, email: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example3c">
                               Your Email
@@ -52,6 +69,10 @@ const Signup = () => {
                               type="number"
                               id="form3Example3c"
                               className="form-control"
+                              value={user.phone}
+                              onChange={(e) =>
+                                setUser({ ...user, phone: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example3c">
                               Your Number
@@ -66,6 +87,10 @@ const Signup = () => {
                               type="text"
                               id="form3Example3c"
                               className="form-control"
+                              value={user.work}
+                              onChange={(e) =>
+                                setUser({ ...user, work: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example3c">
                               Your Work
@@ -80,6 +105,10 @@ const Signup = () => {
                               type="password"
                               id="form3Example4c"
                               className="form-control"
+                              value={user.password}
+                              onChange={(e) =>
+                                setUser({ ...user, password: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example4c">
                               Password
@@ -94,29 +123,16 @@ const Signup = () => {
                               type="password"
                               id="form3Example4cd"
                               className="form-control"
+                              value={user.repassword}
+                              onChange={(e) =>
+                                setUser({ ...user, repassword: e.target.value })
+                              }
                             />
                             <label className="form-label" for="form3Example4cd">
                               Repeat your password
                             </label>
                           </div>
                         </div>
-                        {/* 
-                        <div className="form-check d-flex justify-content-center mb-5">
-                          <input
-                            className="form-check-input me-2"
-                            type="checkbox"
-                            value=""
-                            id="form2Example3c"
-                          />
-                          <label
-                            className="form-check-label"
-                            for="form2Example3"
-                          >
-                            I agree all statements in{" "}
-                            <a href="#!">Terms of service</a>
-                          </label>
-                        </div> */}
-
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="button"
