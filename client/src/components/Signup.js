@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -10,6 +11,32 @@ const Signup = () => {
     password: "",
     repassword: "",
   });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Hello");
+    const { name, email, work, phone, password, repassword } = user;
+    const result = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        work,
+        phone,
+        password,
+        repassword,
+      }),
+    });
+    const data = await result.json();
+    if (data.status === 201) {
+      console.log("Successfully");
+    } else {
+      console.log("Unsuccessfully");
+    }
+    console.log(data);
+  };
 
   return (
     <>
@@ -25,7 +52,11 @@ const Signup = () => {
                         Sign up
                       </p>
 
-                      <form className="mx-1 mx-md-4">
+                      <form
+                        className="mx-1 mx-md-4"
+                        method="post"
+                        onSubmit={handleSubmit}
+                      >
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
@@ -135,7 +166,7 @@ const Signup = () => {
                         </div>
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
-                            type="button"
+                            type="submit"
                             className="btn btn-primary btn-lg"
                           >
                             Register

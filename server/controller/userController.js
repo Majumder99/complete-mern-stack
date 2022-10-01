@@ -38,9 +38,9 @@ const registerPost = async (req, res) => {
           repassword,
         });
         if (user) {
-          res.status(201).json({ msg: "User created" });
+          res.status(201).json({ msg: "User created", status: 201 });
         } else {
-          res.status(500).json({ msg: "User cannot be created" });
+          res.status(500).json({ msg: "User cannot be created", status: 500 });
         }
       }
     } catch (error) {
