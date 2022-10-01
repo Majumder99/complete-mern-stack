@@ -62,7 +62,7 @@ const userLogin = async (req, res) => {
       if (isMatch) {
         const token = generateToken(userExist._id);
         res
-          .cookie("jwt", token, { httpOnly: true, maxAge: 600000 })
+          .cookie("jwtoken", token, { httpOnly: true, maxAge: 600000 })
           .json({ msg: userExist, status: 201 });
         console.log(token);
       } else {
@@ -77,7 +77,11 @@ const userLogin = async (req, res) => {
 };
 
 //about page
-const aboutPage = () => {};
+const aboutPage = (req, res) => {
+  console.log("Hello from about");
+  // res.send(req.token);
+  res.json({ token: req.token, status: 201, info: req.userInfo });
+};
 
 module.exports = {
   homeGet,

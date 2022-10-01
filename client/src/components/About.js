@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import pic from "../image/pic.jpeg";
 const About = () => {
+  const navigate = useNavigate();
+  const callAboutPage = async () => {
+    try {
+      const result = await fetch("/about", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const res = await result.json();
+      console.log(res);
+      if (!res.status === 201) {
+        throw new Error("somthing wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login");
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
   return (
     <>
       <div className="mt-5">
         <div className="container">
-          <form action="">
+          <form method="get">
             <div className="row">
               <div className="col-md-4">
                 <img
