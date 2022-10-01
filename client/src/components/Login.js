@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [value, setValue] = useState({
+    email: "",
+    password: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = value;
+    const result = await fetch("/login", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    const res = await result.json();
+    if (res.status === 201) {
+      console.log("Successfull");
+      navigate("/");
+    } else {
+      console.log("Unsuccessfull");
+    }
+  };
+
   return (
     <>
       <section className="vh-100 mt-5">
@@ -18,13 +44,17 @@ const Login = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
+              <form method="post" onSubmit={handleSubmit}>
                 <div className="form-outline mb-4">
                   <input
                     type="email"
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    value={value.email}
+                    onChange={(e) =>
+                      setValue({ ...value, email: e.target.value })
+                    }
                   />
                   <label className="form-label" for="form3Example3">
                     Email address
@@ -37,6 +67,10 @@ const Login = () => {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={value.password}
+                    onChange={(e) =>
+                      setValue({ ...value, password: e.target.value })
+                    }
                   />
                   <label className="form-label" for="form3Example4">
                     Password
@@ -45,7 +79,7 @@ const Login = () => {
 
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >

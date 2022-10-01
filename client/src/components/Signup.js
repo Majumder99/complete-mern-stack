@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -29,11 +30,14 @@ const Signup = () => {
         repassword,
       }),
     });
+
     const data = await result.json();
     if (data.status === 201) {
       console.log("Successfully");
+      navigate("/login");
     } else {
       console.log("Unsuccessfully");
+      alert("Try again");
     }
     console.log(data);
   };
