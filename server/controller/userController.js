@@ -60,9 +60,10 @@ const userLogin = async (req, res) => {
     if (userExist) {
       const isMatch = await bcrypt.compare(password, userExist.password);
       if (isMatch) {
-        res.status(201).json({ msg: userExist, status: 201 });
         const token = generateToken(userExist._id);
-        res.cookie("jwt", token, { httpOnly: true, maxAge: 600000 });
+        res
+          .cookie("jwt", token, { httpOnly: true, maxAge: 600000 })
+          .json({ msg: userExist, status: 201 });
         console.log(token);
       } else {
         res.status(404).json({ msg: "Invalid credentials" });
@@ -75,8 +76,12 @@ const userLogin = async (req, res) => {
   }
 };
 
+//about page
+const aboutPage = () => {};
+
 module.exports = {
   homeGet,
   registerPost,
   userLogin,
+  aboutPage,
 };

@@ -26,6 +26,7 @@ const Login = () => {
     } else {
       console.log("Unsuccessfull");
     }
+    console.log(res);
   };
 
   return (
