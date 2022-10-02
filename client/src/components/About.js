@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import pic from "../image/pic.jpeg";
 const About = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
   const callAboutPage = async () => {
     try {
       const result = await fetch("/about", {
@@ -16,6 +17,7 @@ const About = () => {
       });
       const res = await result.json();
       console.log(res);
+      setUserData(res.info);
       if (!res.status === 201) {
         throw new Error("somthing wrong");
       }
@@ -44,8 +46,8 @@ const About = () => {
 
               <div className="col-md-6">
                 <div className="profile_head">
-                  <h5>Sourav</h5>
-                  <h6>Web developer</h6>
+                  <h5>{userData.name}</h5>
+                  <h6>{userData.work}</h6>
                   <p className="profile_rating mt-3 mb-5">
                     Rankings: <span>1/10</span>
                   </p>
@@ -81,28 +83,55 @@ const About = () => {
                     </li>
                   </ul>
                   {/* tab-content */}
-                  <div class="tab-content" id="myTabContent">
+                  <div class="tab-content mt-5" id="myTabContent">
                     <div
                       class="tab-pane fade show active"
                       id="home"
                       role="tabpanel"
                       aria-labelledby="home-tab"
                     >
-                      <div className="row">
+                      <div className="row mt-3">
                         <div className="col-md-6">
                           <label htmlFor="User Id">User Id</label>
                         </div>
                         <div className="col-md-6">
-                          <p>54546546</p>
+                          <p>{userData._id}</p>
                         </div>
                       </div>
 
-                      <div className="row">
+                      <div className="row mt-3">
                         <div className="col-md-6">
-                          <label htmlFor="User Id">User Id</label>
+                          <label htmlFor="User Id">Name</label>
                         </div>
                         <div className="col-md-6">
-                          <p>54546546</p>
+                          <p>{userData.name}</p>
+                        </div>
+                      </div>
+
+                      <div className="row mt-3">
+                        <div className="col-md-6">
+                          <label htmlFor="User Id">Email</label>
+                        </div>
+                        <div className="col-md-6">
+                          <p>{userData.email}</p>
+                        </div>
+                      </div>
+
+                      <div className="row mt-3">
+                        <div className="col-md-6">
+                          <label htmlFor="User Id">Phone</label>
+                        </div>
+                        <div className="col-md-6">
+                          <p>{userData.phone}</p>
+                        </div>
+                      </div>
+
+                      <div className="row mt-3">
+                        <div className="col-md-6">
+                          <label htmlFor="User Id">Work</label>
+                        </div>
+                        <div className="col-md-6">
+                          <p>{userData.work}</p>
                         </div>
                       </div>
                     </div>

@@ -1,5 +1,34 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 const Contact = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+  const callAboutPage = async () => {
+    try {
+      const result = await fetch("/contact", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const res = await result.json();
+      console.log(res);
+      setUserData(res.info);
+      if (!res.status === 201) {
+        throw new Error("somthing wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login");
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
   return (
     <>
       <div className="container-fluid mt-5">
@@ -9,7 +38,7 @@ const Contact = () => {
               <i className="fas fa-phone me-4"></i>
               <div className="d-flex flex-column">
                 <h3>Phone</h3>
-                <p>011212</p>
+                <p>{userData.phone}</p>
               </div>
             </div>
           </div>
@@ -18,7 +47,7 @@ const Contact = () => {
               <i className="fas fa-envelope me-4"></i>
               <div className="d-flex flex-column">
                 <h3>Email</h3>
-                <p>s@gmail.com</p>
+                <p>{userData.email}</p>
               </div>
             </div>
           </div>
@@ -26,8 +55,8 @@ const Contact = () => {
             <div className="box d-flex flex-row ms-2 align-items-center shadow p-2 mb-5 bg-body rounded">
               <i className="fas fa-address-card me-4"></i>
               <div className="d-flex flex-column">
-                <h3>Address</h3>
-                <p>savar,dhaka</p>
+                <h3>Work</h3>
+                <p>{userData.work}</p>
               </div>
             </div>
           </div>
@@ -49,21 +78,36 @@ const Contact = () => {
                 <label htmlFor="name" className="me-4">
                   Your Name
                 </label>
-                <input type="text" id="name" style={{ width: "100%" }} />
+                <input
+                  type="text"
+                  id="name"
+                  style={{ width: "100%" }}
+                  value={userData.name}
+                />
               </div>
 
               <div className="p-2 m-3" style={{ width: "500px" }}>
                 <label htmlFor="email" className="me-4">
                   Your Email
                 </label>
-                <input type="email" id="email" style={{ width: "100%" }} />
+                <input
+                  type="email"
+                  id="email"
+                  style={{ width: "100%" }}
+                  value={userData.email}
+                />
               </div>
 
               <div className="p-2 m-3" style={{ width: "500px" }}>
                 <label htmlFor="subject" className="me-4">
-                  Your Subject
+                  Your Phone
                 </label>
-                <input type="text" id="subject" style={{ width: "100%" }} />
+                <input
+                  type="text"
+                  id="subject"
+                  style={{ width: "100%" }}
+                  value={userData.phone}
+                />
               </div>
 
               <div className="p-2 m-3" style={{ width: "500px" }}>

@@ -83,9 +83,17 @@ const aboutPage = (req, res) => {
   res.json({ token: req.token, status: 201, info: req.userInfo });
 };
 
+//contact page
+const contactPage = (req, res) => {
+  console.log("Hello from contact");
+  // res.send(req.token);
+  res.json({ token: req.token, status: 201, info: req.userInfo });
+};
+
 module.exports = {
   homeGet,
   registerPost,
   userLogin,
   aboutPage,
+  contactPage,
 };
