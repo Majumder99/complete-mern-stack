@@ -59,4 +59,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.methods.addMessage = async function (name, email, phone, message) {
+  try {
+    this.messages = this.messages.concat({ name, email, phone, message });
+    await this.save();
+    return this.messages;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = mongoose.model("User", userSchema);

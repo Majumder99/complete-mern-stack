@@ -108,7 +108,7 @@ const Contact = () => {
           <h2 className="h1-responsive font-weight-bold text-center my-4">
             Contact us
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} method="post">
             <div className="d-flex flex-column justify-content-center align-items-center">
               <div className="p-2 m-3" style={{ width: "500px" }}>
                 <label htmlFor="name" className="me-4">

@@ -100,29 +100,19 @@ const contactPostPage = async (req, res) => {
     }
     const userId = await User.findOne({ _id: req.userId });
     if (userId) {
-      // res.json({
-      //   name: userId.name,
-      //   email: userId.email,
-      //   message: userId.messages,
-      // });
-      userId.messages.name = name;
-      userId.messages.email = email;
-      userId.messages.phone = phone;
-      userId.messages.message = message;
-      // res.json({
-      //   message: userId.messages.message,
-      // });
-      userId.save((err, data) => {
-        if (err) {
-          res.json({ msg: err });
-        }
-        res.json({ msg: "all okay" });
-      });
+      const userMessage = await userId.addMessage(name, email, phone, message);
+      await userId.save();
+      res.status(201).json({ msg: "User saved" });
     }
   } catch (error) {
     console.log("Error occurs");
     res.json({ msg: "User not found" });
   }
+};
+
+const alldata = async (req, res) => {
+  const result = await User.findById({ _id: "63383468f73bbbb200dfe71c" });
+  res.json({ result });
 };
 
 module.exports = {
@@ -132,4 +122,5 @@ module.exports = {
   aboutPage,
   contactPage,
   contactPostPage,
+  alldata,
 };
