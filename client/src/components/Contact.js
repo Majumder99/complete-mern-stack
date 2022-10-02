@@ -9,7 +9,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  const callAboutPage = async () => {
+  const callContactPage = async () => {
     try {
       const result = await fetch("/contact", {
         method: "GET",
@@ -37,7 +37,7 @@ const Contact = () => {
   };
 
   useEffect(() => {
-    callAboutPage();
+    callContactPage();
   }, []);
 
   const handleSubmit = async (e) => {
