@@ -90,10 +90,46 @@ const contactPage = (req, res) => {
   res.json({ token: req.token, status: 201, info: req.userInfo });
 };
 
+//contact post page
+const contactPostPage = async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+    if (!name || !email || !phone || !message) {
+      console.log("Error in contact form");
+      return res.json({ error: "Please fill out the form" });
+    }
+    const userId = await User.findOne({ _id: req.userId });
+    if (userId) {
+      // res.json({
+      //   name: userId.name,
+      //   email: userId.email,
+      //   message: userId.messages,
+      // });
+      userId.messages.name = name;
+      userId.messages.email = email;
+      userId.messages.phone = phone;
+      userId.messages.message = message;
+      // res.json({
+      //   message: userId.messages.message,
+      // });
+      userId.save((err, data) => {
+        if (err) {
+          res.json({ msg: err });
+        }
+        res.json({ msg: "all okay" });
+      });
+    }
+  } catch (error) {
+    console.log("Error occurs");
+    res.json({ msg: "User not found" });
+  }
+};
+
 module.exports = {
   homeGet,
   registerPost,
   userLogin,
   aboutPage,
   contactPage,
+  contactPostPage,
 };
