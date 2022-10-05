@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 const Login = () => {
+  const { dispatch } = useContext(UserContext);
+
   const navigate = useNavigate();
   const [value, setValue] = useState({
     email: "",
@@ -13,7 +16,7 @@ const Login = () => {
     const { email, password } = value;
     const result = await fetch("/login", {
       method: "post",
-      headers: { "content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
         password,
@@ -22,6 +25,7 @@ const Login = () => {
     const res = await result.json();
     if (res.status === 201) {
       console.log("Successfull");
+      dispatch({ type: "USER", payload: true });
       navigate("/");
     } else {
       console.log("Unsuccessfull");

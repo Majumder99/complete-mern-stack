@@ -115,6 +115,13 @@ const alldata = async (req, res) => {
   res.json({ result });
 };
 
+const logoutPage = async (req, res) => {
+  console.log("Hello from logout");
+  res.clearCookie("jwtoken", { path: "/" });
+  res.end();
+  res.status(201).json({ msg: "Logout from website" });
+};
+
 module.exports = {
   homeGet,
   registerPost,
@@ -123,4 +130,5 @@ module.exports = {
   contactPage,
   contactPostPage,
   alldata,
+  logoutPage,
 };

@@ -9,6 +9,7 @@ const {
   contactPage,
   contactPostPage,
   alldata,
+  logoutPage,
 } = require("../controller/userController.js");
 
 router.get("/", homeGet);
@@ -17,6 +18,7 @@ router.post("/login", userLogin);
 router.get("/about", authentication, aboutPage);
 router.get("/contact", authentication, contactPage);
 router.post("/contact", authentication, contactPostPage);
+router.get("/logout", authentication, logoutPage);
 router.get("/alldata", alldata);
 
 module.exports = router;
