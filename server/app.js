@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 dotenv.config({ path: "./config.env" });
 require("./db/conn");
 
-PORT = process.env.PORT || 8000;
+PORT = process.env.PORT || 5000;
 const app = express();
 
 //middleware
@@ -12,21 +12,13 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(require("./routes/userRoutes"));
 
-// app.get("/", (req, res) => {
-//   res.send("Home page");
-// });
-// app.get("/about", (req, res) => {
-//   res.send("about page");
-// });
-// app.get("/contact", (req, res) => {
-//   res.send("contact page");
-// });
-// app.get("/signin", (req, res) => {
-//   res.send("signin page");
-// });
-// app.get("/signup", (req, res) => {
-//   res.send("signup page");
-// });
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server started running at port ${PORT}`);

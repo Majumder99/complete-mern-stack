@@ -12,7 +12,6 @@ const {
   logoutPage,
 } = require("../controller/userController.js");
 
-router.get("/", homeGet);
 router.post("/register", registerPost);
 router.post("/login", userLogin);
 router.get("/about", authentication, aboutPage);
